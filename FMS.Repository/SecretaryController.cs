@@ -1,4 +1,5 @@
-﻿using FMS.Data;
+﻿
+using FMS.Model;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace FMS.Repository
 {
-    class SecretaryController
+  public  class SecretaryController
     {
         FMSEntities db;
         public SecretaryController()
@@ -24,18 +25,33 @@ namespace FMS.Repository
          
         public void EditSecretary(SecretaryDetail secretary)
         {
-            secretary = (SecretaryDetail)db.SecretaryDetails.Where(sec =>
+            secretary = db.SecretaryDetails.FirstOrDefault(sec =>
            sec.Name == secretary.Name);
-            db.Entry(secretary).State = EntityState.Modified;
-            db.SaveChanges();
+            if (secretary != null)
+            {
+                db.Entry(secretary).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+            else
+            {
+                throw new Exception("Sec Not found");
+            }
         }
 
-        public void DeleteSecretary(SecretaryDetail secretary)
+        public void DeleteSecretary(string secName)
         {
-            secretary = (SecretaryDetail)db.SecretaryDetails.Where(sec =>
-           sec.Name == secretary.Name);
-            db.Entry(secretary).State = EntityState.Deleted;
-            db.SaveChanges();
+            var secretary = db.SecretaryDetails.FirstOrDefault(sec =>
+           sec.Name == secName);
+            if (secretary != null)
+            {
+                db.Entry(secretary).State = EntityState.Deleted;
+                db.SaveChanges();
+            }
+            else{
+                throw new Exception("Sec Not found");
+            }
+
+          
         }
 
         public List<SecretaryDetail> GetSecretarys()
@@ -43,9 +59,9 @@ namespace FMS.Repository
             return db.SecretaryDetails.ToList();
         }
 
-        public List<SecretaryDetail> GetSecretarys(string name)
+        public SecretaryDetail GetSecretarys(string name)
         {
-            return db.SecretaryDetails.Where(sec => sec.Name == name).ToList();
+            return db.SecretaryDetails.FirstOrDefault(sec => sec.Name == name);
         }
     }
 }

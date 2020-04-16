@@ -60,6 +60,7 @@
     <Compile Include="CEO.cs">
       <DependentUpon>FMSModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="CustomerController.cs" />
     <Compile Include="CustomerDetail.cs">
       <DependentUpon>FMSModel.tt</DependentUpon>
     </Compile>
@@ -112,13 +113,14 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>FMSModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="App.Config" />
     <None Include="FMSModel.edmx.diagram">
       <DependentUpon>FMSModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="FMSModel.Context.tt">
@@ -131,9 +133,6 @@
       <DependentUpon>FMSModel.edmx</DependentUpon>
       <LastGenOutput>FMSModel.cs</LastGenOutput>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,4 +1,5 @@
-﻿using FMS.Data;
+﻿
+using FMS.Model;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace FMS.Repository
 {
-    class CannoeController
+  public  class CannoeController
     {
         private FMSEntities db;
 
@@ -27,25 +28,39 @@ namespace FMS.Repository
             return db.CannoeDetails.ToList();
         }
 
-        public List<CannoeDetail> GetCannoes(string cannoetype)
+        public CannoeDetail GetCannoes(string cannoetype)
         {
-            return db.CannoeDetails.Where(cust => cust.cannoeType == cannoetype).ToList();
+            return db.CannoeDetails.FirstOrDefault(cust => cust.cannoeType == cannoetype);
         }
 
         public void EditCannoe(CannoeDetail cannoe)
         {
-            cannoe = (CannoeDetail)db.CannoeDetails.Where(cust =>
+            cannoe = db.CannoeDetails.FirstOrDefault(cust =>
             cust.cannoeType == cannoe.cannoeType);
-            db.Entry(cannoe).State = EntityState.Modified;
-            db.SaveChanges();
+            if (cannoe != null)
+            {
+                db.Entry(cannoe).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+            else
+            {
+                throw new Exception("Cannoe Not found");
+            }
         }
 
         public void DeleteCannoe(CannoeDetail cannoe)
         {
-            cannoe = (CannoeDetail)db.CannoeDetails.Where(cust =>
+            cannoe = db.CannoeDetails.FirstOrDefault(cust =>
             cust.cannoeType == cannoe.cannoeType);
-            db.Entry(cannoe).State = EntityState.Deleted;
-            db.SaveChanges();
+            if (cannoe != null)
+            {
+                db.Entry(cannoe).State = EntityState.Deleted;
+                db.SaveChanges();
+            }
+            else
+            {
+                throw new Exception("Cannoe Not found");
+            }
         }
 
     }

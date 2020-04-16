@@ -1,4 +1,5 @@
-﻿using FMS.Data;
+﻿
+using FMS.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FMS.Repository
 {
-    class CustomerTransactionController
+   public class CustomerTransactionController
     {
         FMSEntities db;
         public CustomerTransactionController()
@@ -30,9 +31,9 @@ namespace FMS.Repository
         }
 
         // Get Specific customer and his dept
-        public List<CustomerWithDept_Result> GetCustomersWithDept(CustomerDetail customer)
+        public List<CustomerWithDept_Result> GetCustomersWithDept(string customerId)
         {
-            return db.CustomerWithDept(customer.customerId).ToList();
+            return db.CustomerWithDept(customerId).ToList();
         }
 
         //Get All Payments of a Customer
@@ -41,11 +42,24 @@ namespace FMS.Repository
             return db.RetrieveAllCustomerPayments(customerId).ToList();
         }
 
+        public List<RetrieveCustomerPayments_Result> GetAllCustomerPayments()
+        {
+            return db.RetrieveCustomerPayments().ToList();
+        }
+
+
         // Add Customer Payments
         public void AddCustomerPayment(CustomerPaymentDetail payment)
         {
             db.CustomerPaymentDetails.Add(payment);
             db.SaveChanges();
+        }
+
+        // Get All Orders 
+        public List<FishOrderDetail> GetAllCustomerOrder()
+        {
+           
+            return db.FishOrderDetails.ToList();
         }
     }
 }

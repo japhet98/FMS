@@ -44,7 +44,7 @@
           <Property Name="sn" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Phone" Type="varchar" MaxLength="10" />
-          <Property Name="Resident" Type="varbinary" MaxLength="50" />
+          <Property Name="Resident" Type="varchar" MaxLength="50" />
           <Property Name="customerId" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
@@ -268,7 +268,7 @@ warning 6002: The table/view 'FMSdb.dbo.CustomersWithDept' does not have a prima
           <Property Name="sn" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Resident" Type="Binary" MaxLength="50" FixedLength="false" />
+          <Property Name="Resident" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="customerId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="FishOrderDetails" Relationship="Self.FK_FishOrderDetail_CustomerDetail" FromRole="CustomerDetail" ToRole="FishOrderDetail" />
@@ -405,7 +405,7 @@ warning 6002: The table/view 'FMSdb.dbo.CustomersWithDept' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="FMSEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="FMSdbEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ArrivedBoatDetails" EntityType="Self.ArrivedBoatDetail" />
           <EntitySet Name="CannoeDetails" EntityType="Self.CannoeDetail" />
           <EntitySet Name="CEOs" EntityType="Self.CEO" />
@@ -466,7 +466,7 @@ warning 6002: The table/view 'FMSdb.dbo.CustomersWithDept' does not have a prima
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="FMSdbModelStoreContainer" CdmEntityContainer="FMSEntities">
+        <EntityContainerMapping StorageEntityContainer="FMSdbModelStoreContainer" CdmEntityContainer="FMSdbEntities">
           <EntitySetMapping Name="ArrivedBoatDetails">
             <EntityTypeMapping TypeName="FMSdbModel.ArrivedBoatDetail">
               <MappingFragment StoreEntitySet="ArrivedBoatDetail">

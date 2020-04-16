@@ -1,4 +1,5 @@
-﻿using FMS.Data;
+﻿
+using FMS.Model;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace FMS.Repository
 {
-    class CeoController
+   public class CeoController
     {
         FMSEntities db;
 
@@ -28,18 +29,32 @@ namespace FMS.Repository
             return db.CEOs.ToList();
         }
 
-        public void DeleteCeo(CEO ceo)
+        public void DeleteCeo(string username)
         {
-            ceo = (CEO)db.CEOs.Where(ce => ce.username == ceo.username);
-            db.Entry(ceo).State = EntityState.Deleted;
-            db.SaveChanges();
+           var ceo =db.CEOs.FirstOrDefault(ce => ce.username == username);
+            if (ceo != null)
+            {
+                db.Entry(ceo).State = EntityState.Deleted;
+                db.SaveChanges();
+            }
+            else
+            {
+                throw new Exception("CEO Not found");
+            }
         }
         
         public void EditCeo(CEO ceo)
         {
-            ceo = (CEO)db.CEOs.Where(ce => ceo.username == ceo.username);
-            db.Entry(ceo).State = EntityState.Modified;
-            db.SaveChanges();
+            ceo = db.CEOs.FirstOrDefault(ce => ceo.username == ceo.username);
+            if (ceo != null)
+            {
+                db.Entry(ceo).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+            else
+            {
+                throw new Exception("CEO Not found");
+            }
         }
     }
 }

@@ -15,10 +15,10 @@ namespace FMS.Data
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class FMSEntities : DbContext
+    public partial class FMSdbEntities : DbContext
     {
-        public FMSEntities()
-            : base("name=FMSEntities")
+        public FMSdbEntities()
+            : base("name=FMSdbEntities")
         {
         }
     

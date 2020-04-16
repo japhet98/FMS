@@ -1,4 +1,5 @@
-﻿using FMS.Data;
+﻿
+using FMS.Model;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace FMS.Repository
 {
-    class FishTypeController
+  public  class FishTypeController
     {
         private FMSEntities db;
 
@@ -27,25 +28,40 @@ namespace FMS.Repository
             return db.FishTypes.ToList();
         }
 
-        public List<FishType> GetCannoes(string fishtype)
+        public FishType GetAddFishTypes(string fishtype)
         {
-            return db.FishTypes.Where(cust => cust.fishType1 == fishtype).ToList();
+            return db.FishTypes.FirstOrDefault(cust => cust.fishType1 == fishtype);
         }
 
         public void EditFishType(FishType fishtype)
         {
-            fishtype = (FishType)db.FishTypes.Where(cust =>
+            fishtype = db.FishTypes.FirstOrDefault(cust =>
             cust.fishType1 == fishtype.fishType1);
-            db.Entry(fishtype).State = EntityState.Modified;
-            db.SaveChanges();
+            if(fishtype != null)
+            {
+                db.Entry(fishtype).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+            else
+            {
+                throw new Exception("Fish Type Not found");
+            }
+           
         }
 
         public void DeleteFishType(FishType fishtype)
         {
-            fishtype = (FishType)db.FishTypes.Where(cust =>
+            fishtype = db.FishTypes.FirstOrDefault(cust =>
            cust.fishType1 == fishtype.fishType1);
-            db.Entry(fishtype).State = EntityState.Deleted;
-            db.SaveChanges();
+            if (fishtype != null)
+            {
+                db.Entry(fishtype).State = EntityState.Deleted;
+                db.SaveChanges();
+            }
+            else
+            {
+                throw new Exception("Fish Type Not found");
+            }
         }
     }
 }

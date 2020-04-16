@@ -23,7 +23,7 @@ namespace FMS.Data
         public int sn { get; set; }
         public string Name { get; set; }
         public string Phone { get; set; }
-        public byte[] Resident { get; set; }
+        public string Resident { get; set; }
         public string customerId { get; set; }
         public bool IsActive { get; set; }
     

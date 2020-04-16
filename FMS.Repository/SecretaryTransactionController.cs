@@ -1,4 +1,5 @@
-﻿using FMS.Data;
+﻿
+using FMS.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FMS.Repository
 {
-    class SecretaryTransactionController
+   public class SecretaryTransactionController
     {
         private FMSEntities db;
 
@@ -28,9 +29,9 @@ namespace FMS.Repository
         {
             return db.SecretaryPaymentDetails.ToList();
         }
-        public List<SecretaryPaymentDetail> GetAllPaidSecretary(string name)
+        public SecretaryPaymentDetail GetAllPaidSecretary(string name)
         {
-            return db.SecretaryPaymentDetails.Where(sec => sec.secretaryName == name).ToList();
+            return db.SecretaryPaymentDetails.FirstOrDefault(sec => sec.secretaryName == name);
         }
     }
 }
