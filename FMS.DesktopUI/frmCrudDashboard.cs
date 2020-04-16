@@ -49,7 +49,7 @@ namespace FMS.DesktopUI
                 var a = customer.GetCustomers();
                 Console.Write(a);
                 dgvResult.Columns.Add("sn", "SN");
-                dgvResult.Columns.Add("Name", "NAME");
+              //  dgvResult.Columns.Add("Name", "NAME");
 
                 //dgvResult.DataBindings.Add()
 
