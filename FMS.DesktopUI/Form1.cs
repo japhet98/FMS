@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FMS.Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,12 +13,39 @@ namespace FMS.DesktopUI
 {
     public partial class Form1 : Form
     {
+        SecretaryDetail Sec;
+        CEO Ceo;
         private  string authentication { get; set; }
         public Form1()
         {
             InitializeComponent();
             hideSubMenu();
           HideMenusBeforLogin();
+        }
+
+        // User Login Consttructor
+        public Form1(string user, SecretaryDetail sec,CEO ceo)
+        {
+            InitializeComponent();
+            authentication = user;
+            hideSubMenu();
+            HideShowMenuAfterLogin(user);
+
+            if (user == "secretary")
+            {
+                txtUsername.Text = sec.Name;
+                Sec = sec;
+                
+                Console.WriteLine(sec);
+            }
+            if (user == "ceo")
+            {
+                txtUsername.Text = ceo.Name;
+                Ceo = ceo;
+                Console.WriteLine(ceo);
+            }
+          
+
         }
         public Form1(string user)
         {
@@ -121,14 +149,14 @@ namespace FMS.DesktopUI
         {
            if(authentication == "ceo")
             {
-                var ceo = new frmRegisterCeo();
+                var ceo = new frmRegisterCeo(Ceo);
                 ceo.ShowDialog();
                
                
             }
            else if(authentication == "secretary")
             {
-                var sec = new frmRegisterSecretary();
+                var sec = new frmRegisterSecretary(Sec);
                 sec.ShowDialog();
             }
         }
@@ -166,6 +194,12 @@ namespace FMS.DesktopUI
         private void btnSecretary_Click(object sender, EventArgs e)
         {
             openChildForm(new frmCrudDashboard("secretary"));
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+             this.FormBorderStyle = FormBorderStyle.None;
+            this.Bounds = Screen.PrimaryScreen.Bounds;
         }
     }
 }
