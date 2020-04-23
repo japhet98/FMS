@@ -14,15 +14,18 @@ namespace FMS.Model
     public partial class CustomerWithDept_Result
     {
         public string Name { get; set; }
-        public string CannoeType { get; set; }
-        public string BoatNo { get; set; }
-        public string leaderName { get; set; }
-        public string fishType { get; set; }
-        public int quatity { get; set; }
-        public decimal unitPrice { get; set; }
-        public decimal totalAmount { get; set; }
+        public string Phone { get; set; }
+        public string Expr1 { get; set; }
+        public string Expr2 { get; set; }
+        public System.DateTime Expr7 { get; set; }
+        public string Expr8 { get; set; }
+        public int Expr9 { get; set; }
+        public int orderId { get; set; }
+        public string FshType { get; set; }
+        public int Quantity { get; set; }
+        public decimal UnitPrice { get; set; }
+        public Nullable<decimal> TotalAmount { get; set; }
         public decimal Balance { get; set; }
-        public System.DateTime dateOrdered { get; set; }
-        public System.DateTime dateArrived { get; set; }
+        public System.DateTime DateOrdered { get; set; }
     }
 }

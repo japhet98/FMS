@@ -11,57 +11,47 @@ namespace FMS.Repository
 {
   public  class FishTypeController
     {
-        private FMSEntities db;
+        private FMSEntities _db;
 
         public FishTypeController()
         {
-            db = new FMSEntities();
-        }
-        public void AddFishType(FishType fishtype)
-        {
-            db.FishTypes.Add(fishtype);
-            db.SaveChanges();
+            _db = new FMSEntities();
         }
 
-        public List<FishType> GetAddFishTypes()
+        public void AddFish(Fish fish)
         {
-            return db.FishTypes.ToList();
+            _db.Fish.Add(fish);
+            _db.SaveChanges();
         }
 
-        public FishType GetAddFishTypes(string fishtype)
+        public void UpdateFish(Fish fish)
         {
-            return db.FishTypes.FirstOrDefault(cust => cust.fishType1 == fishtype);
+            fish = _db.Fish.FirstOrDefault(cust => cust.FishId == fish.FishId);
+            _db.Entry(fish).State = EntityState.Modified;
+            _db.SaveChanges();
         }
 
-        public void EditFishType(FishType fishtype)
+        public void DeleteFish(Fish fish)
         {
-            fishtype = db.FishTypes.FirstOrDefault(cust =>
-            cust.fishType1 == fishtype.fishType1);
-            if(fishtype != null)
+            fish = _db.Fish.FirstOrDefault(cust => cust.FishId == fish.FishId);
+            if (fish != null)
             {
-                db.Entry(fishtype).State = EntityState.Modified;
-                db.SaveChanges();
+                _db.Entry(fish).State = EntityState.Deleted;
+                _db.SaveChanges();
             }
             else
             {
-                throw new Exception("Fish Type Not found");
+                throw new Exception("Fish Id cannot be found");
             }
-           
         }
 
-        public void DeleteFishType(FishType fishtype)
+        public Fish GetFishs(int FishId)
         {
-            fishtype = db.FishTypes.FirstOrDefault(cust =>
-           cust.fishType1 == fishtype.fishType1);
-            if (fishtype != null)
-            {
-                db.Entry(fishtype).State = EntityState.Deleted;
-                db.SaveChanges();
-            }
-            else
-            {
-                throw new Exception("Fish Type Not found");
-            }
+            return _db.Fish.FirstOrDefault(cust => cust.FishId == FishId);
+        }
+        public List<Fish> GetFishs()
+        {
+            return _db.Fish.ToList();
         }
     }
 }

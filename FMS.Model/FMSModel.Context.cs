@@ -27,39 +27,41 @@ namespace FMS.Model
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<ArrivedBoatDetail> ArrivedBoatDetails { get; set; }
-        public virtual DbSet<CannoeDetail> CannoeDetails { get; set; }
-        public virtual DbSet<CEO> CEOs { get; set; }
-        public virtual DbSet<CustomerDetail> CustomerDetails { get; set; }
-        public virtual DbSet<CustomerPaymentDetail> CustomerPaymentDetails { get; set; }
-        public virtual DbSet<FishOrderDetail> FishOrderDetails { get; set; }
-        public virtual DbSet<FishType> FishTypes { get; set; }
-        public virtual DbSet<SecretaryDetail> SecretaryDetails { get; set; }
-        public virtual DbSet<SecretaryPaymentDetail> SecretaryPaymentDetails { get; set; }
+        public virtual DbSet<Cannoe> Cannoes { get; set; }
+        public virtual DbSet<Customer> Customers { get; set; }
+        public virtual DbSet<CustomerPayment> CustomerPayments { get; set; }
+        public virtual DbSet<FishOrder> FishOrders { get; set; }
+        public virtual DbSet<Saler> Salers { get; set; }
+        public virtual DbSet<SalerPayment> SalerPayments { get; set; }
+        public virtual DbSet<Secretary> Secretaries { get; set; }
+        public virtual DbSet<SecretaryPayment> SecretaryPayments { get; set; }
+        public virtual DbSet<Shipping> Shippings { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<CustomersWithDept> CustomersWithDepts { get; set; }
+        public virtual DbSet<CEO> CEOs { get; set; }
+        public virtual DbSet<Fish> Fish { get; set; }
     
-        public virtual ObjectResult<CustomerWithDept_Result> CustomerWithDept(string customerId)
+        public virtual ObjectResult<CustomerWithDept_Result> CustomerWithDept(Nullable<int> customerId)
         {
-            var customerIdParameter = customerId != null ?
+            var customerIdParameter = customerId.HasValue ?
                 new ObjectParameter("customerId", customerId) :
-                new ObjectParameter("customerId", typeof(string));
+                new ObjectParameter("customerId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CustomerWithDept_Result>("CustomerWithDept", customerIdParameter);
         }
     
-        public virtual ObjectResult<RetrieveAllCustomerPayments_Result> RetrieveAllCustomerPayments(string customerId)
+        public virtual int RetrieveAllCustomersPayment()
         {
-            var customerIdParameter = customerId != null ?
-                new ObjectParameter("customerId", customerId) :
-                new ObjectParameter("customerId", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<RetrieveAllCustomerPayments_Result>("RetrieveAllCustomerPayments", customerIdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("RetrieveAllCustomersPayment");
         }
     
-        public virtual ObjectResult<RetrieveCustomerPayments_Result> RetrieveCustomerPayments()
+        public virtual int RetrieveCustomerPayment(Nullable<int> customerId)
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<RetrieveCustomerPayments_Result>("RetrieveCustomerPayments");
+            var customerIdParameter = customerId.HasValue ?
+                new ObjectParameter("customerId", customerId) :
+                new ObjectParameter("customerId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("RetrieveCustomerPayment", customerIdParameter);
         }
     }
 }

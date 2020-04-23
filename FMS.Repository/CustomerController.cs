@@ -8,66 +8,49 @@ namespace FMS.Repository
 {
     public   class CustomerController
     {
-        FMSEntities db;
+        FMSEntities _db;
      
         public CustomerController()
         {
-            db = new FMSEntities();
+            _db = new FMSEntities();
            
         }
-
-        public void AddCustomer(CustomerDetail customer)
+        public void AddCustomer(Customer customer)
         {
-            db.CustomerDetails.Add(customer);
-            db.SaveChanges();
+            _db.Customers.Add(customer);
+            _db.SaveChanges();
         }
 
-        public List<CustomerDetail> GetCustomers()
+        public void UpdateCustomer(Customer customer)
         {
-            return db.CustomerDetails.ToList();
-          
+            customer = _db.Customers.FirstOrDefault(cust => cust.customerId == customer.customerId);
+            _db.Entry(customer).State = EntityState.Modified;
+            _db.SaveChanges();
         }
 
-        public List<CustomerDetail> GetCustomers(string customerId)
+        public void DeleteCustomer(Customer customer)
         {
-           
-            return db.CustomerDetails.Where(cust => cust.Name == customerId).ToList();
-        }
-
-        public void EditCustomer(CustomerDetail customer)
-        {
-            customer =db.CustomerDetails.FirstOrDefault(cust =>
-            cust.customerId == customer.customerId);
-            if(customer != null)
-            {
-                db.Entry(customer).State = EntityState.Modified;
-                db.SaveChanges();
-            }
-            else
-            {
-                throw new Exception("Customer Does not Exit");
-            }
-           
-        }
-
-        public void DeleteCustomer(string customerId)
-        {
-          var  customer=db.CustomerDetails.FirstOrDefault(cust =>
-            cust.customerId == customerId);
+            customer = _db.Customers.FirstOrDefault(cust => cust.customerId == customer.customerId);
             if (customer != null)
             {
-                db.Entry(customer).State = EntityState.Deleted;
-                db.SaveChanges();
+                _db.Entry(customer).State = EntityState.Deleted;
+                _db.SaveChanges();
             }
             else
             {
-                throw new Exception("Customer Does not Exit");
+                throw new Exception("Customer Id cannot be found");
             }
         }
 
-       
+        public Customer GetCustomers(int CusttomerId)
+        {
+            return _db.Customers.FirstOrDefault(cust => cust.customerId == CusttomerId);
+        }
+        public List<Customer> GetCustomers()
+        {
+            return _db.Customers.ToList();
+        }
 
-        
 
     }
 }

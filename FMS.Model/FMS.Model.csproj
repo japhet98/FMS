@@ -59,19 +59,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ArrivedBoatDetail.cs">
-      <DependentUpon>FMSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CannoeDetail.cs">
+    <Compile Include="Cannoe.cs">
       <DependentUpon>FMSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="CEO.cs">
       <DependentUpon>FMSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="CustomerDetail.cs">
+    <Compile Include="Customer.cs">
       <DependentUpon>FMSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="CustomerPaymentDetail.cs">
+    <Compile Include="CustomerPayment.cs">
       <DependentUpon>FMSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="CustomersWithDept.cs">
@@ -80,10 +77,10 @@
     <Compile Include="CustomerWithDept_Result.cs">
       <DependentUpon>FMSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="FishOrderDetail.cs">
+    <Compile Include="Fish.cs">
       <DependentUpon>FMSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="FishType.cs">
+    <Compile Include="FishOrder.cs">
       <DependentUpon>FMSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="FMSModel.Context.cs">
@@ -102,16 +99,19 @@
       <DependentUpon>FMSModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RetrieveAllCustomerPayments_Result.cs">
+    <Compile Include="Saler.cs">
       <DependentUpon>FMSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="RetrieveCustomerPayments_Result.cs">
+    <Compile Include="SalerPayment.cs">
       <DependentUpon>FMSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="SecretaryDetail.cs">
+    <Compile Include="Secretary.cs">
       <DependentUpon>FMSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="SecretaryPaymentDetail.cs">
+    <Compile Include="SecretaryPayment.cs">
+      <DependentUpon>FMSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Shipping.cs">
       <DependentUpon>FMSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="sysdiagram.cs">
@@ -127,16 +127,12 @@
     <None Include="FMSModel.edmx.diagram">
       <DependentUpon>FMSModel.edmx</DependentUpon>
     </None>
-    <None Include="Grid.mvc.readme" />
     <None Include="packages.config" />
-    <None Include="Views\Shared\_Grid.cshtml" />
-    <None Include="Views\Shared\_GridPager.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Gridmvc.css" />
     <Content Include="FMSModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>FMSModel.edmx</DependentUpon>
@@ -147,9 +143,6 @@
       <DependentUpon>FMSModel.edmx</DependentUpon>
       <LastGenOutput>FMSModel.cs</LastGenOutput>
     </Content>
-    <Content Include="Scripts\gridmvc.js" />
-    <Content Include="Scripts\gridmvc.lang.ru.js" />
-    <Content Include="Scripts\gridmvc.min.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

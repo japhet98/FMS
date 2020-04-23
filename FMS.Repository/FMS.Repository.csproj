@@ -46,10 +46,6 @@
       <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="GridMvc, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Grid.Mvc.3.0.0\lib\net40\GridMvc.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -65,8 +61,11 @@
     <Compile Include="CeoController.cs" />
     <Compile Include="CustomerController.cs" />
     <Compile Include="CustomerTransactionController.cs" />
+    <Compile Include="FishOrderController.cs" />
     <Compile Include="FishTypeController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SalerController.cs" />
+    <Compile Include="SalerTransactionController.cs" />
     <Compile Include="SecretaryController.cs" />
     <Compile Include="SecretaryTransactionController.cs" />
     <Compile Include="ShippingDetailController.cs" />
@@ -79,16 +78,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Grid.mvc.readme" />
     <None Include="packages.config" />
-    <None Include="Views\Shared\_Grid.cshtml" />
-    <None Include="Views\Shared\_GridPager.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Content\Gridmvc.css" />
-    <Content Include="Scripts\gridmvc.js" />
-    <Content Include="Scripts\gridmvc.lang.ru.js" />
-    <Content Include="Scripts\gridmvc.min.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

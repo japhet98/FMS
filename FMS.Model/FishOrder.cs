@@ -12,22 +12,28 @@ namespace FMS.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class CustomersWithDept
+    public partial class FishOrder
     {
-        public string Name { get; set; }
-        public string Phone { get; set; }
-        public string Expr1 { get; set; }
-        public string Expr2 { get; set; }
-        public System.DateTime Expr7 { get; set; }
-        public string Expr8 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public FishOrder()
+        {
+            this.CustomerPayments = new HashSet<CustomerPayment>();
+        }
+    
         public int orderId { get; set; }
+        public int ShippingId { get; set; }
+        public int CustomerId { get; set; }
         public string FshType { get; set; }
         public int Quantity { get; set; }
         public decimal UnitPrice { get; set; }
         public Nullable<decimal> TotalAmount { get; set; }
         public decimal Balance { get; set; }
+        public Nullable<bool> PaidFull { get; set; }
         public System.DateTime DateOrdered { get; set; }
-        public int ShippingId { get; set; }
-        public int customerId { get; set; }
+    
+        public virtual Customer Customer { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CustomerPayment> CustomerPayments { get; set; }
+        public virtual Shipping Shipping { get; set; }
     }
 }

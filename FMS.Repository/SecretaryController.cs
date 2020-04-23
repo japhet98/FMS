@@ -11,57 +11,47 @@ namespace FMS.Repository
 {
   public  class SecretaryController
     {
-        FMSEntities db;
+        FMSEntities _db;
         public SecretaryController()
         {
-            db = new FMSEntities();
+            _db = new FMSEntities();
         }
 
-        public void AddSecretary(SecretaryDetail secretary)
+        public void AddSecretary(Secretary sec)
         {
-            db.SecretaryDetails.Add(secretary);
-            db.SaveChanges();
+            _db.Secretaries.Add(sec);
+            _db.SaveChanges();
         }
-         
-        public void EditSecretary(SecretaryDetail secretary)
+
+        public void UpdateSecretary(Secretary sec)
         {
-            secretary = db.SecretaryDetails.FirstOrDefault(sec =>
-           sec.Name == secretary.Name);
-            if (secretary != null)
+            sec = _db.Secretaries.FirstOrDefault(cust => cust.SecretaryId == sec.SecretaryId);
+            _db.Entry(sec).State = EntityState.Modified;
+            _db.SaveChanges();
+        }
+
+        public void DeleteSecretary(Secretary sec)
+        {
+            sec = _db.Secretaries.FirstOrDefault(cust => cust.SecretaryId == sec.SecretaryId);
+            if (sec != null)
             {
-                db.Entry(secretary).State = EntityState.Modified;
-                db.SaveChanges();
+                _db.Entry(sec).State = EntityState.Deleted;
+                _db.SaveChanges();
             }
             else
             {
-                throw new Exception("Sec Not found");
+                throw new Exception("Secretary Id cannot be found");
             }
         }
 
-        public void DeleteSecretary(string secName)
+        public Secretary GetSecretaries(int SecretaryId)
         {
-            var secretary = db.SecretaryDetails.FirstOrDefault(sec =>
-           sec.Name == secName);
-            if (secretary != null)
-            {
-                db.Entry(secretary).State = EntityState.Deleted;
-                db.SaveChanges();
-            }
-            else{
-                throw new Exception("Sec Not found");
-            }
-
-          
+            return _db.Secretaries.FirstOrDefault(cust => cust.SecretaryId == SecretaryId);
+        }
+        public List<Secretary> GetSecretaries()
+        {
+            return _db.Secretaries.ToList();
         }
 
-        public List<SecretaryDetail> GetSecretarys()
-        {
-            return db.SecretaryDetails.ToList();
-        }
-
-        public SecretaryDetail GetSecretarys(string name)
-        {
-            return db.SecretaryDetails.FirstOrDefault(sec => sec.Name == name);
-        }
     }
 }

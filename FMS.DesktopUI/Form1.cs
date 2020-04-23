@@ -13,7 +13,7 @@ namespace FMS.DesktopUI
 {
     public partial class Form1 : Form
     {
-        SecretaryDetail Sec;
+        Secretary Sec;
         CEO Ceo;
         private  string authentication { get; set; }
         public Form1()
@@ -24,7 +24,7 @@ namespace FMS.DesktopUI
         }
 
         // User Login Consttructor
-        public Form1(string user, SecretaryDetail sec,CEO ceo)
+        public Form1(string user, Secretary sec,CEO ceo)
         {
             InitializeComponent();
             authentication = user;

@@ -30,7 +30,7 @@ namespace FMS.DesktopUI
             InitializeComponent();
             // Set the Data GridView with all the details from the Customer DB
              var customer = new CustomerController();
-                adgvResult.DataSource = customer.GetCustomers();
+              //  adgvResult.DataSource = customer.GetCustomers();
 
            
         }
@@ -195,7 +195,7 @@ namespace FMS.DesktopUI
                 {
                     adgvResult.Rows.Add(cust.sn, cust.Name, cust.Phone, cust.Resident);
                 });*/
-                for (int i = 0; i < 1; i++)
+              /*  for (int i = 0; i < 1; i++)
                 {
                     customer.GetCustomers().ForEach(cust =>
                     {
@@ -203,7 +203,7 @@ namespace FMS.DesktopUI
                     });
                 }
                 emptyGridView();
-
+                */
             }
             else if (table == "secretary")
             {
@@ -443,7 +443,7 @@ namespace FMS.DesktopUI
                 if (adgvResult.CurrentRow.Index >= 0)
                 {
                     var selectedRowCells = adgvResult.SelectedRows[0].Cells;
-                    var C = new CustomerDetail();
+                    var C = new Customer();
                     CheckInputIsNull(adgvResult.ColumnCount);
                     C.Name = selectedRowCells[1].Value.ToString();
                     C.Phone = selectedRowCells[2].Value.ToString();
@@ -519,11 +519,11 @@ namespace FMS.DesktopUI
                     CheckInputIsNull(dgvResult.ColumnCount);
                     var selectedRowCells = adgvResult.SelectedRows[0].Cells;
 
-                    var C = new CustomerDetail();
+                    var C = new Customer();
                     C.Name = selectedRowCells[1].Value.ToString();
                     C.Phone = selectedRowCells[2].Value.ToString();
                     C.Resident = selectedRowCells[3].Value.ToString();
-                    adgvResult.Rows.Remove(dgvResult.SelectedRows[0]);
+                    selectedRowCells.Clear();
                     MessageBox.Show("Deleted");
                 }
                 else {
@@ -596,10 +596,10 @@ namespace FMS.DesktopUI
             }
             else if (table == "Cpayment")
             {
-                var a = Ctransaction.GetAllCustomerPayments(searchName); 
+               /* var a = Ctransaction.GetAllCustomerPayments(searchName); 
                 adgvResult.AutoGenerateColumns = false;
                 adgvResult.DataSource = customer.GetCustomers(searchName);
-            
+            */
             }
         }
         private void btnAdd_Click(object sender, EventArgs e)

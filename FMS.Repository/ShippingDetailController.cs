@@ -10,63 +10,48 @@ namespace FMS.Repository
 {
     public class ShippingDetailController
     {
-        FMSEntities db;
+        FMSEntities _db;
         public ShippingDetailController()
         {
-            db = new FMSEntities();
+            _db = new FMSEntities();
         }
 
         //Add Shipping Arrival
-        
-        public void AddShipping(ArrivedBoatDetail ship)
+        public void AddShipping(Shipping shipping)
         {
-            db.ArrivedBoatDetails.Add(ship);
-            db.SaveChanges();
+            _db.Shippings.Add(shipping);
+            _db.SaveChanges();
         }
 
-        // Update shipping Arrival 
-        public void EditShipping(ArrivedBoatDetail ship)
+        public void UpdateShipping(Shipping shipping)
         {
-            ship = db.ArrivedBoatDetails.FirstOrDefault(sh => sh.shippingId == ship.shippingId);
-            if(ship != null)
+            shipping = _db.Shippings.FirstOrDefault(cust => cust.ShippingId == shipping.ShippingId);
+            _db.Entry(shipping).State = EntityState.Modified;
+            _db.SaveChanges();
+        }
+
+        public void DeleteShipping(Shipping shipping)
+        {
+            shipping = _db.Shippings.FirstOrDefault(cust => cust.ShippingId == shipping.ShippingId);
+            if (shipping != null)
             {
-                db.Entry(ship).State = EntityState.Modified;
-                db.SaveChanges();
+                _db.Entry(shipping).State = EntityState.Deleted;
+                _db.SaveChanges();
             }
             else
             {
-                throw new Exception("Shipping Id not found");
+                throw new Exception("Shipping Id cannot be found");
             }
         }
 
-        // Retrieve Single ShippingDetail
-        public List<ArrivedBoatDetail> GetShipping(string shippingId)
+        public Shipping GetShippings(int ShippingId)
         {
-            return db.ArrivedBoatDetails.Where(ship => ship.shippingId == shippingId).ToList();
+            return _db.Shippings.FirstOrDefault(cust => cust.ShippingId == ShippingId);
+        }
+        public List<Shipping> GetShippings()
+        {
+            return _db.Shippings.ToList();
         }
 
-        //Retrieve All Shipping Detail
-
-        public List<ArrivedBoatDetail> GetShipping()
-        {
-            return db.ArrivedBoatDetails.ToList();
-        }
-
-        // Remove Shipping Detail
-
-        public void DeleteShipping(string shippingId)
-        {
-            var ship = db.ArrivedBoatDetails.FirstOrDefault(sh => sh.shippingId == shippingId);
-            
-            if(ship != null)
-            {
-                db.Entry(ship).State = EntityState.Deleted;
-            }
-
-            else
-            {
-                throw new Exception("Shipping Id not found");
-            }
-        }
     }
 }

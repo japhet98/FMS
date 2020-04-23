@@ -12,12 +12,9 @@ namespace FMS.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class CEO
+    public partial class Cannoe
     {
-        public int CeoId { get; set; }
+        public int CannoeId { get; set; }
         public string Name { get; set; }
-        public string Phone { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
     }
 }

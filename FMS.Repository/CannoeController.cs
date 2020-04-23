@@ -9,59 +9,51 @@ using System.Threading.Tasks;
 
 namespace FMS.Repository
 {
-  public  class CannoeController
+    public class CannoeController
     {
-        private FMSEntities db;
+        private FMSEntities _db;
 
         public CannoeController()
         {
-            db = new FMSEntities();
-        }
-        public void AddCannoe(CannoeDetail cannoe)
-        {
-            db.CannoeDetails.Add(cannoe);
-            db.SaveChanges();
+            _db = new FMSEntities();
         }
 
-        public List<CannoeDetail> GetCannoes()
+        public void AddCannoe(Cannoe cannoe)
         {
-            return db.CannoeDetails.ToList();
+            _db.Cannoes.Add(cannoe);
+            _db.SaveChanges();
         }
 
-        public CannoeDetail GetCannoes(string cannoetype)
+        public void UpdateCannoe(Cannoe cannoe)
         {
-            return db.CannoeDetails.FirstOrDefault(cust => cust.cannoeType == cannoetype);
+            cannoe = _db.Cannoes.FirstOrDefault(cust => cust.CannoeId == cannoe.CannoeId);
+            _db.Entry(cannoe).State = EntityState.Modified;
+            _db.SaveChanges();
         }
 
-        public void EditCannoe(CannoeDetail cannoe)
+        public void DeleteCannoe(Cannoe cannoe)
         {
-            cannoe = db.CannoeDetails.FirstOrDefault(cust =>
-            cust.cannoeType == cannoe.cannoeType);
+            cannoe = _db.Cannoes.FirstOrDefault(cust => cust.CannoeId == cannoe.CannoeId);
             if (cannoe != null)
             {
-                db.Entry(cannoe).State = EntityState.Modified;
-                db.SaveChanges();
+                _db.Entry(cannoe).State = EntityState.Deleted;
+                _db.SaveChanges();
             }
             else
             {
-                throw new Exception("Cannoe Not found");
+                throw new Exception("Cannoe Id cannot be found");
             }
         }
 
-        public void DeleteCannoe(CannoeDetail cannoe)
+        public Cannoe GetCannoes(int CannoeId)
         {
-            cannoe = db.CannoeDetails.FirstOrDefault(cust =>
-            cust.cannoeType == cannoe.cannoeType);
-            if (cannoe != null)
-            {
-                db.Entry(cannoe).State = EntityState.Deleted;
-                db.SaveChanges();
-            }
-            else
-            {
-                throw new Exception("Cannoe Not found");
-            }
+            return _db.Cannoes.FirstOrDefault(cust => cust.CannoeId == CannoeId);
         }
+        public List<Cannoe> GetCannoes()
+        {
+            return _db.Cannoes.ToList();
+        }
+
 
     }
 }

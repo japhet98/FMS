@@ -12,12 +12,15 @@ namespace FMS.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class CEO
+    public partial class CustomerPayment
     {
-        public int CeoId { get; set; }
-        public string Name { get; set; }
-        public string Phone { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
+        public int customerPaymentId { get; set; }
+        public int OrderId { get; set; }
+        public decimal Amount { get; set; }
+        public string ReceiverName { get; set; }
+        public System.DateTime DateReceived { get; set; }
+        public string ReceiverSignature { get; set; }
+    
+        public virtual FishOrder FishOrder { get; set; }
     }
 }

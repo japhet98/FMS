@@ -4,106 +4,122 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="FMSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="ArrivedBoatDetail">
+    <Schema Namespace="FMSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cannoe">
           <Key>
-            <PropertyRef Name="shippingId" />
+            <PropertyRef Name="CannoeId" />
           </Key>
-          <Property Name="sn" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="shippingId" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="CannoeType" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="BoatNo" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="QmainFish" Type="int" />
-          <Property Name="QlogoFish" Type="int" />
-          <Property Name="QbrokenFish" Type="int" />
-          <Property Name="totalQuantity" Type="int" />
-          <Property Name="dateArrived" Type="date" Nullable="false" />
-          <Property Name="leaderName" Type="varchar" MaxLength="50" Nullable="false" />
-        </EntityType>
-        <EntityType Name="CannoeDetail">
-          <Key>
-            <PropertyRef Name="cannoeType" />
-          </Key>
-          <Property Name="sn" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="cannoeType" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CannoeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="CEO">
           <Key>
-            <PropertyRef Name="sn" />
+            <PropertyRef Name="CeoId" />
           </Key>
-          <Property Name="sn" Type="int" Nullable="false" />
+          <Property Name="CeoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="phone" Type="varchar" MaxLength="50" />
-          <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="50" />
+          <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <EntityType Name="CustomerDetail">
+        <EntityType Name="Customer">
           <Key>
             <PropertyRef Name="customerId" />
           </Key>
-          <Property Name="sn" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="customerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Phone" Type="varchar" MaxLength="10" />
           <Property Name="Resident" Type="varchar" MaxLength="50" />
-          <Property Name="customerId" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsActive" Type="bit" />
         </EntityType>
-        <EntityType Name="CustomerPaymentDetail">
+        <EntityType Name="CustomerPayment">
           <Key>
-            <PropertyRef Name="sn" />
+            <PropertyRef Name="customerPaymentId" />
           </Key>
-          <Property Name="sn" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="orderId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="customerPaymentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderId" Type="int" Nullable="false" />
           <Property Name="Amount" Type="money" Nullable="false" />
-          <Property Name="receiverName" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="dateReceived" Type="date" Nullable="false" />
-          <Property Name="receiverSignature" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ReceiverName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DateReceived" Type="date" Nullable="false" />
+          <Property Name="ReceiverSignature" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <EntityType Name="FishOrderDetail">
+        <EntityType Name="Fish">
+          <Key>
+            <PropertyRef Name="FishId" />
+          </Key>
+          <Property Name="FishId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FishOrder">
           <Key>
             <PropertyRef Name="orderId" />
           </Key>
-          <Property Name="sn" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="shippingId" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="customerId" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="fishType" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="quatity" Type="int" Nullable="false" />
-          <Property Name="unitPrice" Type="money" Nullable="false" />
-          <Property Name="totalAmount" Type="money" Nullable="false" />
+          <Property Name="orderId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ShippingId" Type="int" Nullable="false" />
+          <Property Name="CustomerId" Type="int" Nullable="false" />
+          <Property Name="FshType" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="UnitPrice" Type="money" Nullable="false" />
+          <Property Name="TotalAmount" Type="money" StoreGeneratedPattern="Computed" />
           <Property Name="Balance" Type="money" Nullable="false" />
-          <Property Name="paidFull" Type="bit" StoreGeneratedPattern="Computed" />
-          <Property Name="orderId" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="dateOrdered" Type="date" Nullable="false" />
+          <Property Name="PaidFull" Type="bit" />
+          <Property Name="DateOrdered" Type="date" Nullable="false" />
         </EntityType>
-        <EntityType Name="FishType">
+        <EntityType Name="Saler">
           <Key>
-            <PropertyRef Name="fishType" />
+            <PropertyRef Name="SalerId" />
           </Key>
-          <Property Name="sn" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="fishType" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SalerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="50" />
         </EntityType>
-        <EntityType Name="SecretaryDetail">
+        <EntityType Name="SalerPayment">
           <Key>
-            <PropertyRef Name="sn" />
+            <PropertyRef Name="SalerPaymentId" />
           </Key>
-          <Property Name="sn" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SalerPaymentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SalerName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DaysWorked" Type="int" />
+          <Property Name="SalerSignature" Type="varchar" MaxLength="50" />
+          <Property Name="Amount" Type="money" Nullable="false" />
+          <Property Name="DatePaid" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Secretary">
+          <Key>
+            <PropertyRef Name="SecretaryId" />
+          </Key>
+          <Property Name="SecretaryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Phone" Type="varchar" MaxLength="10" />
-          <Property Name="email" Type="varchar" MaxLength="50" />
-          <Property Name="residence" Type="varchar" MaxLength="50" />
-          <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Residence" Type="varchar" MaxLength="50" />
+          <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <EntityType Name="SecretaryPaymentDetail">
+        <EntityType Name="SecretaryPayment">
           <Key>
-            <PropertyRef Name="sn" />
+            <PropertyRef Name="SecretaryPaymentId" />
           </Key>
-          <Property Name="sn" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="secretaryName" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="DaysWorked" Type="int" Nullable="false" />
+          <Property Name="SecretaryPaymentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SecretaryName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DaysWorked" Type="int" />
           <Property Name="Amount" Type="money" Nullable="false" />
-          <Property Name="secretarySign" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="datePaid" Type="date" Nullable="false" />
+          <Property Name="SecretarySign" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DatePaid" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Shipping">
+          <Key>
+            <PropertyRef Name="ShippingId" />
+          </Key>
+          <Property Name="ShippingId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Cannoe" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Boat" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="QmainFish" Type="int" />
+          <Property Name="QlogoFish" Type="int" />
+          <Property Name="QbrokenFish" Type="int" />
+          <Property Name="TotalQuantity" Type="int" StoreGeneratedPattern="Computed" />
+          <Property Name="DateArrived" Type="datetime" Nullable="false" />
+          <Property Name="leaderName" Type="nchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -120,224 +136,239 @@ warning 6002: The table/view 'FMSdb.dbo.CustomersWithDept' does not have a prima
         <EntityType Name="CustomersWithDept">
           <Key>
             <PropertyRef Name="Name" />
-            <PropertyRef Name="CannoeType" />
-            <PropertyRef Name="BoatNo" />
-            <PropertyRef Name="leaderName" />
-            <PropertyRef Name="fishType" />
-            <PropertyRef Name="quatity" />
-            <PropertyRef Name="unitPrice" />
-            <PropertyRef Name="totalAmount" />
+            <PropertyRef Name="Expr1" />
+            <PropertyRef Name="Expr2" />
+            <PropertyRef Name="Expr7" />
+            <PropertyRef Name="orderId" />
+            <PropertyRef Name="FshType" />
+            <PropertyRef Name="Quantity" />
+            <PropertyRef Name="UnitPrice" />
             <PropertyRef Name="Balance" />
-            <PropertyRef Name="dateOrdered" />
-            <PropertyRef Name="dateArrived" />
+            <PropertyRef Name="DateOrdered" />
+            <PropertyRef Name="ShippingId" />
+            <PropertyRef Name="customerId" />
           </Key>
           <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="CannoeType" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="BoatNo" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="leaderName" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="fishType" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="quatity" Type="int" Nullable="false" />
-          <Property Name="unitPrice" Type="money" Nullable="false" />
-          <Property Name="totalAmount" Type="money" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="10" />
+          <Property Name="Expr1" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Expr2" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Expr7" Type="datetime" Nullable="false" />
+          <Property Name="Expr8" Type="nchar" MaxLength="10" />
+          <Property Name="orderId" Type="int" Nullable="false" />
+          <Property Name="FshType" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="UnitPrice" Type="money" Nullable="false" />
+          <Property Name="TotalAmount" Type="money" />
           <Property Name="Balance" Type="money" Nullable="false" />
-          <Property Name="dateOrdered" Type="date" Nullable="false" />
-          <Property Name="dateArrived" Type="date" Nullable="false" />
+          <Property Name="DateOrdered" Type="date" Nullable="false" />
+          <Property Name="ShippingId" Type="int" Nullable="false" />
+          <Property Name="customerId" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK_CustomerPaymentDetail_FishOrderDetail">
-          <End Role="FishOrderDetail" Type="Self.FishOrderDetail" Multiplicity="1" />
-          <End Role="CustomerPaymentDetail" Type="Self.CustomerPaymentDetail" Multiplicity="*" />
+        <Association Name="FK_CustomerPayment_FishOrder">
+          <End Role="FishOrder" Type="Self.FishOrder" Multiplicity="1" />
+          <End Role="CustomerPayment" Type="Self.CustomerPayment" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="FishOrderDetail">
+            <Principal Role="FishOrder">
               <PropertyRef Name="orderId" />
             </Principal>
-            <Dependent Role="CustomerPaymentDetail">
-              <PropertyRef Name="orderId" />
+            <Dependent Role="CustomerPayment">
+              <PropertyRef Name="OrderId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_FishOrderDetail_ArrivedBoatDetail">
-          <End Role="ArrivedBoatDetail" Type="Self.ArrivedBoatDetail" Multiplicity="1" />
-          <End Role="FishOrderDetail" Type="Self.FishOrderDetail" Multiplicity="*" />
+        <Association Name="FK_FishOrder_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="FishOrder" Type="Self.FishOrder" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="ArrivedBoatDetail">
-              <PropertyRef Name="shippingId" />
+            <Principal Role="Customer">
+              <PropertyRef Name="customerId" />
             </Principal>
-            <Dependent Role="FishOrderDetail">
-              <PropertyRef Name="shippingId" />
+            <Dependent Role="FishOrder">
+              <PropertyRef Name="CustomerId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_FishOrderDetail_CustomerDetail">
-          <End Role="CustomerDetail" Type="Self.CustomerDetail" Multiplicity="1" />
-          <End Role="FishOrderDetail" Type="Self.FishOrderDetail" Multiplicity="*" />
+        <Association Name="FK_FishOrder_Shipping">
+          <End Role="Shipping" Type="Self.Shipping" Multiplicity="1" />
+          <End Role="FishOrder" Type="Self.FishOrder" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="CustomerDetail">
-              <PropertyRef Name="customerId" />
+            <Principal Role="Shipping">
+              <PropertyRef Name="ShippingId" />
             </Principal>
-            <Dependent Role="FishOrderDetail">
-              <PropertyRef Name="customerId" />
+            <Dependent Role="FishOrder">
+              <PropertyRef Name="ShippingId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Function Name="CustomerWithDept" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="customerId" Type="varchar" Mode="In" />
+          <Parameter Name="customerId" Type="int" Mode="In" />
         </Function>
-        <Function Name="IsFullyPaid" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="bit">
-          <Parameter Name="balance" Type="money" Mode="In" />
+        <Function Name="RetrieveAllCustomersPayment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="RetrieveCustomerPayment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="customerId" Type="int" Mode="In" />
         </Function>
-        <Function Name="RetrieveAllCustomerPayments" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="customerId" Type="varchar" Mode="In" />
+        <Function Name="TotalAmount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="money">
+          <Parameter Name="quantity" Type="int" Mode="In" />
+          <Parameter Name="cost" Type="money" Mode="In" />
         </Function>
-        <Function Name="RetrieveCustomerPayments" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="TotalQuantity" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
+          <Parameter Name="main" Type="int" Mode="In" />
+          <Parameter Name="logo" Type="int" Mode="In" />
+          <Parameter Name="broken" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="FMSModelStoreContainer">
-          <EntitySet Name="ArrivedBoatDetail" EntityType="Self.ArrivedBoatDetail" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="CannoeDetail" EntityType="Self.CannoeDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cannoe" EntityType="Self.Cannoe" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CEO" EntityType="Self.CEO" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="CustomerDetail" EntityType="Self.CustomerDetail" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="CustomerPaymentDetail" EntityType="Self.CustomerPaymentDetail" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="FishOrderDetail" EntityType="Self.FishOrderDetail" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="FishType" EntityType="Self.FishType" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="SecretaryDetail" EntityType="Self.SecretaryDetail" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="SecretaryPaymentDetail" EntityType="Self.SecretaryPaymentDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CustomerPayment" EntityType="Self.CustomerPayment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Fish" EntityType="Self.Fish" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FishOrder" EntityType="Self.FishOrder" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Saler" EntityType="Self.Saler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SalerPayment" EntityType="Self.SalerPayment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Secretary" EntityType="Self.Secretary" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SecretaryPayment" EntityType="Self.SecretaryPayment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Shipping" EntityType="Self.Shipping" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CustomersWithDept" EntityType="Self.CustomersWithDept" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [CustomersWithDept].[Name] AS [Name], 
-    [CustomersWithDept].[CannoeType] AS [CannoeType], 
-    [CustomersWithDept].[BoatNo] AS [BoatNo], 
-    [CustomersWithDept].[leaderName] AS [leaderName], 
-    [CustomersWithDept].[fishType] AS [fishType], 
-    [CustomersWithDept].[quatity] AS [quatity], 
-    [CustomersWithDept].[unitPrice] AS [unitPrice], 
-    [CustomersWithDept].[totalAmount] AS [totalAmount], 
+    [CustomersWithDept].[Phone] AS [Phone], 
+    [CustomersWithDept].[Expr1] AS [Expr1], 
+    [CustomersWithDept].[Expr2] AS [Expr2], 
+    [CustomersWithDept].[Expr7] AS [Expr7], 
+    [CustomersWithDept].[Expr8] AS [Expr8], 
+    [CustomersWithDept].[orderId] AS [orderId], 
+    [CustomersWithDept].[FshType] AS [FshType], 
+    [CustomersWithDept].[Quantity] AS [Quantity], 
+    [CustomersWithDept].[UnitPrice] AS [UnitPrice], 
+    [CustomersWithDept].[TotalAmount] AS [TotalAmount], 
     [CustomersWithDept].[Balance] AS [Balance], 
-    [CustomersWithDept].[dateOrdered] AS [dateOrdered], 
-    [CustomersWithDept].[dateArrived] AS [dateArrived]
+    [CustomersWithDept].[DateOrdered] AS [DateOrdered], 
+    [CustomersWithDept].[ShippingId] AS [ShippingId], 
+    [CustomersWithDept].[customerId] AS [customerId]
     FROM [dbo].[CustomersWithDept] AS [CustomersWithDept]</DefiningQuery>
           </EntitySet>
-          <AssociationSet Name="FK_CustomerPaymentDetail_FishOrderDetail" Association="Self.FK_CustomerPaymentDetail_FishOrderDetail">
-            <End Role="FishOrderDetail" EntitySet="FishOrderDetail" />
-            <End Role="CustomerPaymentDetail" EntitySet="CustomerPaymentDetail" />
+          <AssociationSet Name="FK_CustomerPayment_FishOrder" Association="Self.FK_CustomerPayment_FishOrder">
+            <End Role="FishOrder" EntitySet="FishOrder" />
+            <End Role="CustomerPayment" EntitySet="CustomerPayment" />
           </AssociationSet>
-          <AssociationSet Name="FK_FishOrderDetail_ArrivedBoatDetail" Association="Self.FK_FishOrderDetail_ArrivedBoatDetail">
-            <End Role="ArrivedBoatDetail" EntitySet="ArrivedBoatDetail" />
-            <End Role="FishOrderDetail" EntitySet="FishOrderDetail" />
+          <AssociationSet Name="FK_FishOrder_Customer" Association="Self.FK_FishOrder_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="FishOrder" EntitySet="FishOrder" />
           </AssociationSet>
-          <AssociationSet Name="FK_FishOrderDetail_CustomerDetail" Association="Self.FK_FishOrderDetail_CustomerDetail">
-            <End Role="CustomerDetail" EntitySet="CustomerDetail" />
-            <End Role="FishOrderDetail" EntitySet="FishOrderDetail" />
+          <AssociationSet Name="FK_FishOrder_Shipping" Association="Self.FK_FishOrder_Shipping">
+            <End Role="Shipping" EntitySet="Shipping" />
+            <End Role="FishOrder" EntitySet="FishOrder" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="FMSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="ArrivedBoatDetail">
+        <EntityType Name="Cannoe">
           <Key>
-            <PropertyRef Name="shippingId" />
+            <PropertyRef Name="CannoeId" />
           </Key>
-          <Property Name="sn" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="shippingId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="CannoeType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="BoatNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="QmainFish" Type="Int32" />
-          <Property Name="QlogoFish" Type="Int32" />
-          <Property Name="QbrokenFish" Type="Int32" />
-          <Property Name="totalQuantity" Type="Int32" />
-          <Property Name="dateArrived" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="leaderName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="FishOrderDetails" Relationship="Self.FK_FishOrderDetail_ArrivedBoatDetail" FromRole="ArrivedBoatDetail" ToRole="FishOrderDetail" />
-        </EntityType>
-        <EntityType Name="CannoeDetail">
-          <Key>
-            <PropertyRef Name="cannoeType" />
-          </Key>
-          <Property Name="sn" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="cannoeType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-        </EntityType>
-        <EntityType Name="CEO">
-          <Key>
-            <PropertyRef Name="sn" />
-          </Key>
-          <Property Name="sn" Type="Int32" Nullable="false" />
+          <Property Name="CannoeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
-        <EntityType Name="CustomerDetail">
+        <EntityType Name="Customer">
           <Key>
             <PropertyRef Name="customerId" />
           </Key>
-          <Property Name="sn" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="customerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="Resident" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="customerId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="FishOrderDetails" Relationship="Self.FK_FishOrderDetail_CustomerDetail" FromRole="CustomerDetail" ToRole="FishOrderDetail" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="FishOrders" Relationship="Self.FK_FishOrder_Customer" FromRole="Customer" ToRole="FishOrder" />
         </EntityType>
-        <EntityType Name="CustomerPaymentDetail">
+        <EntityType Name="CustomerPayment">
           <Key>
-            <PropertyRef Name="sn" />
+            <PropertyRef Name="customerPaymentId" />
           </Key>
-          <Property Name="sn" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="orderId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="customerPaymentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderId" Type="Int32" Nullable="false" />
           <Property Name="Amount" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
-          <Property Name="receiverName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="dateReceived" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="receiverSignature" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="FishOrderDetail" Relationship="Self.FK_CustomerPaymentDetail_FishOrderDetail" FromRole="CustomerPaymentDetail" ToRole="FishOrderDetail" />
+          <Property Name="ReceiverName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DateReceived" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ReceiverSignature" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="FishOrder" Relationship="Self.FK_CustomerPayment_FishOrder" FromRole="CustomerPayment" ToRole="FishOrder" />
         </EntityType>
-        <EntityType Name="FishOrderDetail">
+        <EntityType Name="FishOrder">
           <Key>
             <PropertyRef Name="orderId" />
           </Key>
-          <Property Name="sn" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="shippingId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="customerId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="fishType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="quatity" Type="Int32" Nullable="false" />
-          <Property Name="unitPrice" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
-          <Property Name="totalAmount" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="orderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ShippingId" Type="Int32" Nullable="false" />
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
+          <Property Name="FshType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="UnitPrice" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="TotalAmount" Type="Decimal" Precision="19" Scale="4" annotation:StoreGeneratedPattern="Computed" />
           <Property Name="Balance" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
-          <Property Name="paidFull" Type="Boolean" annotation:StoreGeneratedPattern="Computed" />
-          <Property Name="orderId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="dateOrdered" Type="DateTime" Nullable="false" Precision="0" />
-          <NavigationProperty Name="ArrivedBoatDetail" Relationship="Self.FK_FishOrderDetail_ArrivedBoatDetail" FromRole="FishOrderDetail" ToRole="ArrivedBoatDetail" />
-          <NavigationProperty Name="CustomerDetail" Relationship="Self.FK_FishOrderDetail_CustomerDetail" FromRole="FishOrderDetail" ToRole="CustomerDetail" />
-          <NavigationProperty Name="CustomerPaymentDetails" Relationship="Self.FK_CustomerPaymentDetail_FishOrderDetail" FromRole="FishOrderDetail" ToRole="CustomerPaymentDetail" />
+          <Property Name="PaidFull" Type="Boolean" />
+          <Property Name="DateOrdered" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_FishOrder_Customer" FromRole="FishOrder" ToRole="Customer" />
+          <NavigationProperty Name="CustomerPayments" Relationship="Self.FK_CustomerPayment_FishOrder" FromRole="FishOrder" ToRole="CustomerPayment" />
+          <NavigationProperty Name="Shipping" Relationship="Self.FK_FishOrder_Shipping" FromRole="FishOrder" ToRole="Shipping" />
         </EntityType>
-        <EntityType Name="FishType">
+        <EntityType Name="Saler">
           <Key>
-            <PropertyRef Name="fishType1" />
+            <PropertyRef Name="SalerId" />
           </Key>
-          <Property Name="sn" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="fishType1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SalerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="SecretaryDetail">
+        <EntityType Name="SalerPayment">
           <Key>
-            <PropertyRef Name="sn" />
+            <PropertyRef Name="SalerPaymentId" />
           </Key>
-          <Property Name="sn" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SalerPaymentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SalerName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DaysWorked" Type="Int32" />
+          <Property Name="SalerSignature" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Amount" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="DatePaid" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Secretary">
+          <Key>
+            <PropertyRef Name="SecretaryId" />
+          </Key>
+          <Property Name="SecretaryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="residence" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Residence" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
-        <EntityType Name="SecretaryPaymentDetail">
+        <EntityType Name="SecretaryPayment">
           <Key>
-            <PropertyRef Name="sn" />
+            <PropertyRef Name="SecretaryPaymentId" />
           </Key>
-          <Property Name="sn" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="secretaryName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="DaysWorked" Type="Int32" Nullable="false" />
+          <Property Name="SecretaryPaymentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SecretaryName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DaysWorked" Type="Int32" />
           <Property Name="Amount" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
-          <Property Name="secretarySign" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="datePaid" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="SecretarySign" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DatePaid" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+        <EntityType Name="Shipping">
+          <Key>
+            <PropertyRef Name="ShippingId" />
+          </Key>
+          <Property Name="ShippingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Cannoe" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Boat" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="QmainFish" Type="Int32" />
+          <Property Name="QlogoFish" Type="Int32" />
+          <Property Name="QbrokenFish" Type="Int32" />
+          <Property Name="TotalQuantity" Type="Int32" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="DateArrived" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="leaderName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="FishOrders" Relationship="Self.FK_FishOrder_Shipping" FromRole="Shipping" ToRole="FishOrder" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -352,246 +383,248 @@ warning 6002: The table/view 'FMSdb.dbo.CustomersWithDept' does not have a prima
         <EntityType Name="CustomersWithDept">
           <Key>
             <PropertyRef Name="Name" />
-            <PropertyRef Name="CannoeType" />
-            <PropertyRef Name="BoatNo" />
-            <PropertyRef Name="leaderName" />
-            <PropertyRef Name="fishType" />
-            <PropertyRef Name="quatity" />
-            <PropertyRef Name="unitPrice" />
-            <PropertyRef Name="totalAmount" />
+            <PropertyRef Name="Expr1" />
+            <PropertyRef Name="Expr2" />
+            <PropertyRef Name="Expr7" />
+            <PropertyRef Name="orderId" />
+            <PropertyRef Name="FshType" />
+            <PropertyRef Name="Quantity" />
+            <PropertyRef Name="UnitPrice" />
             <PropertyRef Name="Balance" />
-            <PropertyRef Name="dateOrdered" />
-            <PropertyRef Name="dateArrived" />
+            <PropertyRef Name="DateOrdered" />
+            <PropertyRef Name="ShippingId" />
+            <PropertyRef Name="customerId" />
           </Key>
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="CannoeType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="BoatNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="leaderName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="fishType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="quatity" Type="Int32" Nullable="false" />
-          <Property Name="unitPrice" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
-          <Property Name="totalAmount" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Expr1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Expr2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Expr7" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Expr8" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="orderId" Type="Int32" Nullable="false" />
+          <Property Name="FshType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="UnitPrice" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="TotalAmount" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="Balance" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
-          <Property Name="dateOrdered" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="dateArrived" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DateOrdered" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ShippingId" Type="Int32" Nullable="false" />
+          <Property Name="customerId" Type="Int32" Nullable="false" />
         </EntityType>
-        <Association Name="FK_FishOrderDetail_ArrivedBoatDetail">
-          <End Role="ArrivedBoatDetail" Type="Self.ArrivedBoatDetail" Multiplicity="1" />
-          <End Role="FishOrderDetail" Type="Self.FishOrderDetail" Multiplicity="*" />
+        <Association Name="FK_FishOrder_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="FishOrder" Type="Self.FishOrder" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="ArrivedBoatDetail">
-              <PropertyRef Name="shippingId" />
+            <Principal Role="Customer">
+              <PropertyRef Name="customerId" />
             </Principal>
-            <Dependent Role="FishOrderDetail">
-              <PropertyRef Name="shippingId" />
+            <Dependent Role="FishOrder">
+              <PropertyRef Name="CustomerId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_FishOrderDetail_CustomerDetail">
-          <End Role="CustomerDetail" Type="Self.CustomerDetail" Multiplicity="1" />
-          <End Role="FishOrderDetail" Type="Self.FishOrderDetail" Multiplicity="*" />
+        <Association Name="FK_CustomerPayment_FishOrder">
+          <End Role="FishOrder" Type="Self.FishOrder" Multiplicity="1" />
+          <End Role="CustomerPayment" Type="Self.CustomerPayment" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="CustomerDetail">
-              <PropertyRef Name="customerId" />
+            <Principal Role="FishOrder">
+              <PropertyRef Name="orderId" />
             </Principal>
-            <Dependent Role="FishOrderDetail">
-              <PropertyRef Name="customerId" />
+            <Dependent Role="CustomerPayment">
+              <PropertyRef Name="OrderId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_CustomerPaymentDetail_FishOrderDetail">
-          <End Role="FishOrderDetail" Type="Self.FishOrderDetail" Multiplicity="1" />
-          <End Role="CustomerPaymentDetail" Type="Self.CustomerPaymentDetail" Multiplicity="*" />
+        <Association Name="FK_FishOrder_Shipping">
+          <End Role="Shipping" Type="Self.Shipping" Multiplicity="1" />
+          <End Role="FishOrder" Type="Self.FishOrder" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="FishOrderDetail">
-              <PropertyRef Name="orderId" />
+            <Principal Role="Shipping">
+              <PropertyRef Name="ShippingId" />
             </Principal>
-            <Dependent Role="CustomerPaymentDetail">
-              <PropertyRef Name="orderId" />
+            <Dependent Role="FishOrder">
+              <PropertyRef Name="ShippingId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="FMSEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="ArrivedBoatDetails" EntityType="Self.ArrivedBoatDetail" />
-          <EntitySet Name="CannoeDetails" EntityType="Self.CannoeDetail" />
-          <EntitySet Name="CEOs" EntityType="Self.CEO" />
-          <EntitySet Name="CustomerDetails" EntityType="Self.CustomerDetail" />
-          <EntitySet Name="CustomerPaymentDetails" EntityType="Self.CustomerPaymentDetail" />
-          <EntitySet Name="FishOrderDetails" EntityType="Self.FishOrderDetail" />
-          <EntitySet Name="FishTypes" EntityType="Self.FishType" />
-          <EntitySet Name="SecretaryDetails" EntityType="Self.SecretaryDetail" />
-          <EntitySet Name="SecretaryPaymentDetails" EntityType="Self.SecretaryPaymentDetail" />
+          <EntitySet Name="Cannoes" EntityType="Self.Cannoe" />
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="CustomerPayments" EntityType="Self.CustomerPayment" />
+          <EntitySet Name="FishOrders" EntityType="Self.FishOrder" />
+          <EntitySet Name="Salers" EntityType="Self.Saler" />
+          <EntitySet Name="SalerPayments" EntityType="Self.SalerPayment" />
+          <EntitySet Name="Secretaries" EntityType="Self.Secretary" />
+          <EntitySet Name="SecretaryPayments" EntityType="Self.SecretaryPayment" />
+          <EntitySet Name="Shippings" EntityType="Self.Shipping" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="CustomersWithDepts" EntityType="Self.CustomersWithDept" />
-          <AssociationSet Name="FK_FishOrderDetail_ArrivedBoatDetail" Association="Self.FK_FishOrderDetail_ArrivedBoatDetail">
-            <End Role="ArrivedBoatDetail" EntitySet="ArrivedBoatDetails" />
-            <End Role="FishOrderDetail" EntitySet="FishOrderDetails" />
+          <AssociationSet Name="FK_FishOrder_Customer" Association="Self.FK_FishOrder_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="FishOrder" EntitySet="FishOrders" />
           </AssociationSet>
-          <AssociationSet Name="FK_FishOrderDetail_CustomerDetail" Association="Self.FK_FishOrderDetail_CustomerDetail">
-            <End Role="CustomerDetail" EntitySet="CustomerDetails" />
-            <End Role="FishOrderDetail" EntitySet="FishOrderDetails" />
+          <AssociationSet Name="FK_CustomerPayment_FishOrder" Association="Self.FK_CustomerPayment_FishOrder">
+            <End Role="FishOrder" EntitySet="FishOrders" />
+            <End Role="CustomerPayment" EntitySet="CustomerPayments" />
           </AssociationSet>
-          <AssociationSet Name="FK_CustomerPaymentDetail_FishOrderDetail" Association="Self.FK_CustomerPaymentDetail_FishOrderDetail">
-            <End Role="FishOrderDetail" EntitySet="FishOrderDetails" />
-            <End Role="CustomerPaymentDetail" EntitySet="CustomerPaymentDetails" />
+          <AssociationSet Name="FK_FishOrder_Shipping" Association="Self.FK_FishOrder_Shipping">
+            <End Role="Shipping" EntitySet="Shippings" />
+            <End Role="FishOrder" EntitySet="FishOrders" />
           </AssociationSet>
           <FunctionImport Name="CustomerWithDept" ReturnType="Collection(FMSModel.CustomerWithDept_Result)">
-            <Parameter Name="customerId" Mode="In" Type="String" />
+          <Parameter Name="customerId" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="RetrieveAllCustomerPayments" ReturnType="Collection(FMSModel.RetrieveAllCustomerPayments_Result)">
-            <Parameter Name="customerId" Mode="In" Type="String" />
+          <FunctionImport Name="RetrieveAllCustomersPayment" />
+          <FunctionImport Name="RetrieveCustomerPayment">
+          <Parameter Name="customerId" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="RetrieveCustomerPayments" ReturnType="Collection(FMSModel.RetrieveCustomerPayments_Result)" />
+          <EntitySet Name="CEOs" EntityType="FMSModel.CEO" />
+          <EntitySet Name="Fish" EntityType="FMSModel.Fish" />
         </EntityContainer>
         <ComplexType Name="CustomerWithDept_Result">
           <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="CannoeType" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="BoatNo" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="leaderName" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="fishType" Nullable="false" MaxLength="50" />
-          <Property Type="Int32" Name="quatity" Nullable="false" />
-          <Property Type="Decimal" Name="unitPrice" Nullable="false" Precision="19" />
-          <Property Type="Decimal" Name="totalAmount" Nullable="false" Precision="19" />
-          <Property Type="Decimal" Name="Balance" Nullable="false" Precision="19" />
-          <Property Type="DateTime" Name="dateOrdered" Nullable="false" />
-          <Property Type="DateTime" Name="dateArrived" Nullable="false" />
-        </ComplexType>
-        <ComplexType Name="RetrieveAllCustomerPayments_Result">
-          <Property Type="String" Name="Customer_Name" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="Fish_Type" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Phone" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Expr1" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Expr2" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="Expr7" Nullable="false" Precision="23" />
+          <Property Type="String" Name="Expr8" Nullable="true" MaxLength="10" />
+          <Property Type="Int32" Name="Expr9" Nullable="false" />
+          <Property Type="Int32" Name="orderId" Nullable="false" />
+          <Property Type="String" Name="FshType" Nullable="false" MaxLength="50" />
           <Property Type="Int32" Name="Quantity" Nullable="false" />
-          <Property Type="Decimal" Name="Unit_Price" Nullable="false" Precision="19" />
-          <Property Type="Decimal" Name="Total_Amount" Nullable="false" Precision="19" />
+          <Property Type="Decimal" Name="UnitPrice" Nullable="false" Precision="19" />
+          <Property Type="Decimal" Name="TotalAmount" Nullable="true" Precision="19" />
           <Property Type="Decimal" Name="Balance" Nullable="false" Precision="19" />
-          <Property Type="Decimal" Name="Amount_Paid" Nullable="false" Precision="19" />
-          <Property Type="String" Name="Reciever_Name" Nullable="false" MaxLength="50" />
-          <Property Type="DateTime" Name="Date_Ordered" Nullable="false" />
-          <Property Type="DateTime" Name="Date_Received" Nullable="false" />
+          <Property Type="DateTime" Name="DateOrdered" Nullable="false" />
         </ComplexType>
-        <ComplexType Name="RetrieveCustomerPayments_Result">
-          <Property Type="String" Name="Customer_Name" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="Fish_Type" Nullable="false" MaxLength="50" />
-          <Property Type="Int32" Name="Quantity" Nullable="false" />
-          <Property Type="Decimal" Name="Unit_Price" Nullable="false" Precision="19" />
-          <Property Type="Decimal" Name="Total_Amount" Nullable="false" Precision="19" />
-          <Property Type="Decimal" Name="Balance" Nullable="false" Precision="19" />
-          <Property Type="Decimal" Name="Amount_Paid" Nullable="false" Precision="19" />
-          <Property Type="String" Name="Reciever_Name" Nullable="false" MaxLength="50" />
-          <Property Type="DateTime" Name="Date_Ordered" Nullable="false" />
-          <Property Type="DateTime" Name="Date_Received" Nullable="false" />
-        </ComplexType>
+        <EntityType Name="CEO">
+          <Key>
+            <PropertyRef Name="CeoId" />
+          </Key>
+          <Property Name="CeoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Fish">
+          <Key>
+            <PropertyRef Name="FishId" />
+          </Key>
+          <Property Name="FishId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="FMSModelStoreContainer" CdmEntityContainer="FMSEntities">
-          <EntitySetMapping Name="ArrivedBoatDetails">
-            <EntityTypeMapping TypeName="FMSModel.ArrivedBoatDetail">
-              <MappingFragment StoreEntitySet="ArrivedBoatDetail">
-                <ScalarProperty Name="sn" ColumnName="sn" />
-                <ScalarProperty Name="shippingId" ColumnName="shippingId" />
-                <ScalarProperty Name="CannoeType" ColumnName="CannoeType" />
-                <ScalarProperty Name="BoatNo" ColumnName="BoatNo" />
-                <ScalarProperty Name="QmainFish" ColumnName="QmainFish" />
-                <ScalarProperty Name="QlogoFish" ColumnName="QlogoFish" />
-                <ScalarProperty Name="QbrokenFish" ColumnName="QbrokenFish" />
-                <ScalarProperty Name="totalQuantity" ColumnName="totalQuantity" />
-                <ScalarProperty Name="dateArrived" ColumnName="dateArrived" />
-                <ScalarProperty Name="leaderName" ColumnName="leaderName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CannoeDetails">
-            <EntityTypeMapping TypeName="FMSModel.CannoeDetail">
-              <MappingFragment StoreEntitySet="CannoeDetail">
-                <ScalarProperty Name="sn" ColumnName="sn" />
-                <ScalarProperty Name="cannoeType" ColumnName="cannoeType" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CEOs">
-            <EntityTypeMapping TypeName="FMSModel.CEO">
-              <MappingFragment StoreEntitySet="CEO">
-                <ScalarProperty Name="sn" ColumnName="sn" />
+          <EntitySetMapping Name="Cannoes">
+            <EntityTypeMapping TypeName="FMSModel.Cannoe">
+              <MappingFragment StoreEntitySet="Cannoe">
+                <ScalarProperty Name="CannoeId" ColumnName="CannoeId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="phone" ColumnName="phone" />
-                <ScalarProperty Name="username" ColumnName="username" />
-                <ScalarProperty Name="password" ColumnName="password" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="CustomerDetails">
-            <EntityTypeMapping TypeName="FMSModel.CustomerDetail">
-              <MappingFragment StoreEntitySet="CustomerDetail">
-                <ScalarProperty Name="sn" ColumnName="sn" />
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="FMSModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="customerId" ColumnName="customerId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
                 <ScalarProperty Name="Resident" ColumnName="Resident" />
-                <ScalarProperty Name="customerId" ColumnName="customerId" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="CustomerPaymentDetails">
-            <EntityTypeMapping TypeName="FMSModel.CustomerPaymentDetail">
-              <MappingFragment StoreEntitySet="CustomerPaymentDetail">
-                <ScalarProperty Name="sn" ColumnName="sn" />
-                <ScalarProperty Name="orderId" ColumnName="orderId" />
+          <EntitySetMapping Name="CustomerPayments">
+            <EntityTypeMapping TypeName="FMSModel.CustomerPayment">
+              <MappingFragment StoreEntitySet="CustomerPayment">
+                <ScalarProperty Name="customerPaymentId" ColumnName="customerPaymentId" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
                 <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="receiverName" ColumnName="receiverName" />
-                <ScalarProperty Name="dateReceived" ColumnName="dateReceived" />
-                <ScalarProperty Name="receiverSignature" ColumnName="receiverSignature" />
+                <ScalarProperty Name="ReceiverName" ColumnName="ReceiverName" />
+                <ScalarProperty Name="DateReceived" ColumnName="DateReceived" />
+                <ScalarProperty Name="ReceiverSignature" ColumnName="ReceiverSignature" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="FishOrderDetails">
-            <EntityTypeMapping TypeName="FMSModel.FishOrderDetail">
-              <MappingFragment StoreEntitySet="FishOrderDetail">
-                <ScalarProperty Name="sn" ColumnName="sn" />
-                <ScalarProperty Name="shippingId" ColumnName="shippingId" />
-                <ScalarProperty Name="customerId" ColumnName="customerId" />
-                <ScalarProperty Name="fishType" ColumnName="fishType" />
-                <ScalarProperty Name="quatity" ColumnName="quatity" />
-                <ScalarProperty Name="unitPrice" ColumnName="unitPrice" />
-                <ScalarProperty Name="totalAmount" ColumnName="totalAmount" />
-                <ScalarProperty Name="Balance" ColumnName="Balance" />
-                <ScalarProperty Name="paidFull" ColumnName="paidFull" />
+          <EntitySetMapping Name="FishOrders">
+            <EntityTypeMapping TypeName="FMSModel.FishOrder">
+              <MappingFragment StoreEntitySet="FishOrder">
                 <ScalarProperty Name="orderId" ColumnName="orderId" />
-                <ScalarProperty Name="dateOrdered" ColumnName="dateOrdered" />
+                <ScalarProperty Name="ShippingId" ColumnName="ShippingId" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="FshType" ColumnName="FshType" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
+                <ScalarProperty Name="PaidFull" ColumnName="PaidFull" />
+                <ScalarProperty Name="DateOrdered" ColumnName="DateOrdered" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="FishTypes">
-            <EntityTypeMapping TypeName="FMSModel.FishType">
-              <MappingFragment StoreEntitySet="FishType">
-                <ScalarProperty Name="sn" ColumnName="sn" />
-                <ScalarProperty Name="fishType1" ColumnName="fishType" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="SecretaryDetails">
-            <EntityTypeMapping TypeName="FMSModel.SecretaryDetail">
-              <MappingFragment StoreEntitySet="SecretaryDetail">
-                <ScalarProperty Name="sn" ColumnName="sn" />
+          <EntitySetMapping Name="Salers">
+            <EntityTypeMapping TypeName="FMSModel.Saler">
+              <MappingFragment StoreEntitySet="Saler">
+                <ScalarProperty Name="SalerId" ColumnName="SalerId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="residence" ColumnName="residence" />
-                <ScalarProperty Name="username" ColumnName="username" />
-                <ScalarProperty Name="password" ColumnName="password" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="SecretaryPaymentDetails">
-            <EntityTypeMapping TypeName="FMSModel.SecretaryPaymentDetail">
-              <MappingFragment StoreEntitySet="SecretaryPaymentDetail">
-                <ScalarProperty Name="sn" ColumnName="sn" />
-                <ScalarProperty Name="secretaryName" ColumnName="secretaryName" />
+          <EntitySetMapping Name="SalerPayments">
+            <EntityTypeMapping TypeName="FMSModel.SalerPayment">
+              <MappingFragment StoreEntitySet="SalerPayment">
+                <ScalarProperty Name="SalerPaymentId" ColumnName="SalerPaymentId" />
+                <ScalarProperty Name="SalerName" ColumnName="SalerName" />
+                <ScalarProperty Name="DaysWorked" ColumnName="DaysWorked" />
+                <ScalarProperty Name="SalerSignature" ColumnName="SalerSignature" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="DatePaid" ColumnName="DatePaid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Secretaries">
+            <EntityTypeMapping TypeName="FMSModel.Secretary">
+              <MappingFragment StoreEntitySet="Secretary">
+                <ScalarProperty Name="SecretaryId" ColumnName="SecretaryId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Residence" ColumnName="Residence" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SecretaryPayments">
+            <EntityTypeMapping TypeName="FMSModel.SecretaryPayment">
+              <MappingFragment StoreEntitySet="SecretaryPayment">
+                <ScalarProperty Name="SecretaryPaymentId" ColumnName="SecretaryPaymentId" />
+                <ScalarProperty Name="SecretaryName" ColumnName="SecretaryName" />
                 <ScalarProperty Name="DaysWorked" ColumnName="DaysWorked" />
                 <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="secretarySign" ColumnName="secretarySign" />
-                <ScalarProperty Name="datePaid" ColumnName="datePaid" />
+                <ScalarProperty Name="SecretarySign" ColumnName="SecretarySign" />
+                <ScalarProperty Name="DatePaid" ColumnName="DatePaid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Shippings">
+            <EntityTypeMapping TypeName="FMSModel.Shipping">
+              <MappingFragment StoreEntitySet="Shipping">
+                <ScalarProperty Name="ShippingId" ColumnName="ShippingId" />
+                <ScalarProperty Name="Cannoe" ColumnName="Cannoe" />
+                <ScalarProperty Name="Boat" ColumnName="Boat" />
+                <ScalarProperty Name="QmainFish" ColumnName="QmainFish" />
+                <ScalarProperty Name="QlogoFish" ColumnName="QlogoFish" />
+                <ScalarProperty Name="QbrokenFish" ColumnName="QbrokenFish" />
+                <ScalarProperty Name="TotalQuantity" ColumnName="TotalQuantity" />
+                <ScalarProperty Name="DateArrived" ColumnName="DateArrived" />
+                <ScalarProperty Name="leaderName" ColumnName="leaderName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -610,16 +643,20 @@ warning 6002: The table/view 'FMSdb.dbo.CustomersWithDept' does not have a prima
             <EntityTypeMapping TypeName="FMSModel.CustomersWithDept">
               <MappingFragment StoreEntitySet="CustomersWithDept">
                 <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="CannoeType" ColumnName="CannoeType" />
-                <ScalarProperty Name="BoatNo" ColumnName="BoatNo" />
-                <ScalarProperty Name="leaderName" ColumnName="leaderName" />
-                <ScalarProperty Name="fishType" ColumnName="fishType" />
-                <ScalarProperty Name="quatity" ColumnName="quatity" />
-                <ScalarProperty Name="unitPrice" ColumnName="unitPrice" />
-                <ScalarProperty Name="totalAmount" ColumnName="totalAmount" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Expr1" ColumnName="Expr1" />
+                <ScalarProperty Name="Expr2" ColumnName="Expr2" />
+                <ScalarProperty Name="Expr7" ColumnName="Expr7" />
+                <ScalarProperty Name="Expr8" ColumnName="Expr8" />
+                <ScalarProperty Name="orderId" ColumnName="orderId" />
+                <ScalarProperty Name="FshType" ColumnName="FshType" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
                 <ScalarProperty Name="Balance" ColumnName="Balance" />
-                <ScalarProperty Name="dateOrdered" ColumnName="dateOrdered" />
-                <ScalarProperty Name="dateArrived" ColumnName="dateArrived" />
+                <ScalarProperty Name="DateOrdered" ColumnName="DateOrdered" />
+                <ScalarProperty Name="ShippingId" ColumnName="ShippingId" />
+                <ScalarProperty Name="customerId" ColumnName="customerId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -627,51 +664,43 @@ warning 6002: The table/view 'FMSdb.dbo.CustomersWithDept' does not have a prima
             <ResultMapping>
               <ComplexTypeMapping TypeName="FMSModel.CustomerWithDept_Result">
                 <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="CannoeType" ColumnName="CannoeType" />
-                <ScalarProperty Name="BoatNo" ColumnName="BoatNo" />
-                <ScalarProperty Name="leaderName" ColumnName="leaderName" />
-                <ScalarProperty Name="fishType" ColumnName="fishType" />
-                <ScalarProperty Name="quatity" ColumnName="quatity" />
-                <ScalarProperty Name="unitPrice" ColumnName="unitPrice" />
-                <ScalarProperty Name="totalAmount" ColumnName="totalAmount" />
-                <ScalarProperty Name="Balance" ColumnName="Balance" />
-                <ScalarProperty Name="dateOrdered" ColumnName="dateOrdered" />
-                <ScalarProperty Name="dateArrived" ColumnName="dateArrived" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="RetrieveAllCustomerPayments" FunctionName="FMSModel.Store.RetrieveAllCustomerPayments">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="FMSModel.RetrieveAllCustomerPayments_Result">
-                <ScalarProperty Name="Customer_Name" ColumnName="Customer Name" />
-                <ScalarProperty Name="Fish_Type" ColumnName="Fish Type" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Expr1" ColumnName="Expr1" />
+                <ScalarProperty Name="Expr2" ColumnName="Expr2" />
+                <ScalarProperty Name="Expr7" ColumnName="Expr7" />
+                <ScalarProperty Name="Expr8" ColumnName="Expr8" />
+                <ScalarProperty Name="Expr9" ColumnName="Expr9" />
+                <ScalarProperty Name="orderId" ColumnName="orderId" />
+                <ScalarProperty Name="FshType" ColumnName="FshType" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="Unit_Price" ColumnName="Unit Price" />
-                <ScalarProperty Name="Total_Amount" ColumnName="Total Amount" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
                 <ScalarProperty Name="Balance" ColumnName="Balance" />
-                <ScalarProperty Name="Amount_Paid" ColumnName="Amount Paid" />
-                <ScalarProperty Name="Reciever_Name" ColumnName="Reciever Name" />
-                <ScalarProperty Name="Date_Ordered" ColumnName="Date Ordered" />
-                <ScalarProperty Name="Date_Received" ColumnName="Date Received" />
+                <ScalarProperty Name="DateOrdered" ColumnName="DateOrdered" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="RetrieveCustomerPayments" FunctionName="FMSModel.Store.RetrieveCustomerPayments">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="FMSModel.RetrieveCustomerPayments_Result">
-                <ScalarProperty Name="Customer_Name" ColumnName="Customer Name" />
-                <ScalarProperty Name="Fish_Type" ColumnName="Fish Type" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="Unit_Price" ColumnName="Unit Price" />
-                <ScalarProperty Name="Total_Amount" ColumnName="Total Amount" />
-                <ScalarProperty Name="Balance" ColumnName="Balance" />
-                <ScalarProperty Name="Amount_Paid" ColumnName="Amount Paid" />
-                <ScalarProperty Name="Reciever_Name" ColumnName="Reciever Name" />
-                <ScalarProperty Name="Date_Ordered" ColumnName="Date Ordered" />
-                <ScalarProperty Name="Date_Received" ColumnName="Date Received" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="RetrieveAllCustomersPayment" FunctionName="FMSModel.Store.RetrieveAllCustomersPayment" />
+          <FunctionImportMapping FunctionImportName="RetrieveCustomerPayment" FunctionName="FMSModel.Store.RetrieveCustomerPayment" />
+          <EntitySetMapping Name="CEOs">
+            <EntityTypeMapping TypeName="FMSModel.CEO">
+              <MappingFragment StoreEntitySet="CEO">
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CeoId" ColumnName="CeoId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fish">
+            <EntityTypeMapping TypeName="FMSModel.Fish">
+              <MappingFragment StoreEntitySet="Fish">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="FishId" ColumnName="FishId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

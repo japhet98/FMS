@@ -2,6 +2,7 @@
 using FMS.Model;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,56 +11,55 @@ namespace FMS.Repository
 {
    public class CustomerTransactionController
     {
-        FMSEntities db;
+
+        /*
+        Add Customer Payment
+        View Customer Payment
+        Edit Customer payment
+        remove Customer Payment
+
+         */
+        private FMSEntities _db;
+
         public CustomerTransactionController()
         {
-            db = new FMSEntities();
+            _db = new FMSEntities();
         }
 
-        // Create New Customer Order
-        public void AddCustomerOrder(FishOrderDetail order)
+        public void AddCustomerPayment(CustomerPayment payment)
         {
-            db.FishOrderDetails.Add(order);
-            db.SaveChanges();
+            _db.CustomerPayments.Add(payment);
+            _db.SaveChanges();
         }
 
-
-        // Get all customers and their dept
-        public List<CustomersWithDept> GetCustomersWithDept()
+        public void UpdateCustomerPayment(CustomerPayment payment)
         {
-            return db.CustomersWithDepts.ToList();
+            payment = _db.CustomerPayments.FirstOrDefault(cust => cust.customerPaymentId == payment.customerPaymentId);
+            _db.Entry(payment).State = EntityState.Modified;
+            _db.SaveChanges();
         }
 
-        // Get Specific customer and his dept
-        public List<CustomerWithDept_Result> GetCustomersWithDept(string customerId)
+        public void DeleteCustomerPayment(CustomerPayment payment)
         {
-            return db.CustomerWithDept(customerId).ToList();
+            payment = _db.CustomerPayments.FirstOrDefault(cust => cust.customerPaymentId == payment.customerPaymentId);
+            if (payment != null)
+            {
+                _db.Entry(payment).State = EntityState.Deleted;
+                _db.SaveChanges();
+            }
+            else
+            {
+                throw new Exception("CustomerPayment Id cannot be found");
+            }
         }
 
-        //Get All Payments of a Customer
-        public List<RetrieveAllCustomerPayments_Result> GetAllCustomerPayments(string customerId)
+        public CustomerPayment GetCustomerPayments(int CustomerPaymentId)
         {
-            return db.RetrieveAllCustomerPayments(customerId).ToList();
+            return _db.CustomerPayments.FirstOrDefault(cust => cust.customerPaymentId == CustomerPaymentId);
         }
-
-        public List<RetrieveCustomerPayments_Result> GetAllCustomerPayments()
+        public List<CustomerPayment> GetCustomerPayments()
         {
-            return db.RetrieveCustomerPayments().ToList();
-        }
-
-
-        // Add Customer Payments
-        public void AddCustomerPayment(CustomerPaymentDetail payment)
-        {
-            db.CustomerPaymentDetails.Add(payment);
-            db.SaveChanges();
-        }
-
-        // Get All Orders 
-        public List<FishOrderDetail> GetAllCustomerOrder()
-        {
-           
-            return db.FishOrderDetails.ToList();
+            return _db.CustomerPayments.ToList();
         }
     }
 }

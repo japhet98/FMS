@@ -11,50 +11,48 @@ namespace FMS.Repository
 {
    public class CeoController
     {
-        FMSEntities db;
+        FMSEntities _db;
 
         public CeoController()
         {
-            db = new FMSEntities();
+            _db = new FMSEntities();
+        }
+        public void AddCEO(CEO ceo)
+        {
+            _db.CEOs.Add(ceo);
+            _db.SaveChanges();
         }
 
-        public void AddCeo(CEO ceo)
+        public void UpdateCEO(CEO ceo)
         {
-            db.CEOs.Add(ceo);
-            db.SaveChanges();
+            ceo = _db.CEOs.FirstOrDefault(cust => cust.CeoId == ceo.CeoId);
+            _db.Entry(ceo).State = EntityState.Modified;
+            _db.SaveChanges();
         }
 
-        public List<CEO> GetCeo()
+        public void DeleteCEO(CEO ceo)
         {
-            return db.CEOs.ToList();
-        }
-
-        public void DeleteCeo(string username)
-        {
-           var ceo =db.CEOs.FirstOrDefault(ce => ce.username == username);
+            ceo = _db.CEOs.FirstOrDefault(cust => cust.CeoId == ceo.CeoId);
             if (ceo != null)
             {
-                db.Entry(ceo).State = EntityState.Deleted;
-                db.SaveChanges();
+                _db.Entry(ceo).State = EntityState.Deleted;
+                _db.SaveChanges();
             }
             else
             {
-                throw new Exception("CEO Not found");
+                throw new Exception("CEO Id cannot be found");
             }
         }
-        
-        public void EditCeo(CEO ceo)
+
+        public CEO GetCEOs(int ceoId)
         {
-            ceo = db.CEOs.FirstOrDefault(ce => ceo.username == ceo.username);
-            if (ceo != null)
-            {
-                db.Entry(ceo).State = EntityState.Modified;
-                db.SaveChanges();
-            }
-            else
-            {
-                throw new Exception("CEO Not found");
-            }
+            return _db.CEOs.FirstOrDefault(cust => cust.CeoId == ceoId);
         }
+        public List<CEO> GetCEOs()
+        {
+            return _db.CEOs.ToList();
+        }
+
+
     }
 }

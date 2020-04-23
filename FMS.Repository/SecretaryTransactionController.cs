@@ -2,6 +2,7 @@
 using FMS.Model;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,28 +11,48 @@ namespace FMS.Repository
 {
    public class SecretaryTransactionController
     {
-        private FMSEntities db;
+        private FMSEntities _db;
 
         public SecretaryTransactionController()
         {
-            db = new FMSEntities();
+            _db = new FMSEntities();
+        }
+        public void AddSecretaryPayment(SecretaryPayment payment)
+        {
+            _db.SecretaryPayments.Add(payment);
+            _db.SaveChanges();
         }
 
-        //Pay Secretary
-        public void AddSecretaryPayment(SecretaryPaymentDetail payment)
+
+        public void UpdateSecretaryPayment(SecretaryPayment payment)
         {
-            db.SecretaryPaymentDetails.Add(payment);
-            db.SaveChanges();
+            payment = _db.SecretaryPayments.FirstOrDefault(cust => cust.SecretaryPaymentId == payment.SecretaryPaymentId);
+            _db.Entry(payment).State = EntityState.Modified;
+            _db.SaveChanges();
         }
 
-        // Get Paid Secretaries
-        public List<SecretaryPaymentDetail> GetAllPaidSecretary()
+        public void DeleteSecretaryPayment(SecretaryPayment payment)
         {
-            return db.SecretaryPaymentDetails.ToList();
+            payment = _db.SecretaryPayments.FirstOrDefault(cust => cust.SecretaryPaymentId == payment.SecretaryPaymentId);
+            if (payment != null)
+            {
+                _db.Entry(payment).State = EntityState.Deleted;
+                _db.SaveChanges();
+            }
+            else
+            {
+                throw new Exception("SecretaryPayment Id cannot be found");
+            }
         }
-        public SecretaryPaymentDetail GetAllPaidSecretary(string name)
+
+        public SecretaryPayment GetSecretaryPayments(int SecretaryPaymentId)
         {
-            return db.SecretaryPaymentDetails.FirstOrDefault(sec => sec.secretaryName == name);
+            return _db.SecretaryPayments.FirstOrDefault(cust => cust.SecretaryPaymentId == SecretaryPaymentId);
+        }
+        public List<SecretaryPayment> GetSecretaryPayments()
+        {
+            return _db.SecretaryPayments.ToList();
         }
     }
 }
+

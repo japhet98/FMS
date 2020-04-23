@@ -12,12 +12,13 @@ namespace FMS.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class CEO
+    public partial class SecretaryPayment
     {
-        public int CeoId { get; set; }
-        public string Name { get; set; }
-        public string Phone { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
+        public int SecretaryPaymentId { get; set; }
+        public string SecretaryName { get; set; }
+        public Nullable<int> DaysWorked { get; set; }
+        public decimal Amount { get; set; }
+        public string SecretarySign { get; set; }
+        public System.DateTime DatePaid { get; set; }
     }
 }
